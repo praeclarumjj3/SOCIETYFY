@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Societyfy</string>
+    <string name="not_log_in_register_from_here">Not Log IN | Register From here</string>
+    <string name="log_in">Log IN</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="sqlite_user_login_screen">SQLite User Login Screen</string>
+</resources>
