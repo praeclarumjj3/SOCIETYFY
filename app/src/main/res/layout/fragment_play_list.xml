@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.Play_list"
+    android:orientation="vertical">
+
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:weightSum="100"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="#07b892"
+            android:textStyle="italic"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:layout_marginBottom="10dp"
+            android:text="Meet your Play mates!!!"
+            android:textAllCaps="true"
+            android:textAlignment="center"
+            android:textColor="#ffffff"
+            android:layout_weight="1"
+            android:textSize="20sp"/>
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/play_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="50" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="49"
+            android:id="@+id/map_container">
+
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/map"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <ImageButton
+                android:id="@+id/btn_full_screen_map"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@id/map_container"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="60dp"
+                android:background="#fff"
+                android:padding="5dp"
+                android:src="@drawable/ic_fullscreen_black_24dp"
+                tools:ignore="NotSibling" />
+
+            <ImageButton
+                android:id="@+id/btn_reset_map"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@id/map_container"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="115dp"
+                android:layout_marginRight="115dp"
+                android:background="#fff"
+                android:padding="5dp"
+                android:src="@drawable/ic_refresh_black_24dp"
+                tools:ignore="NotSibling" />
+
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

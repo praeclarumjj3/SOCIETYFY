@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.Fragments.HomeFragment">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.Fragments.HomeFragment"
+    android:orientation="vertical"
+    android:background="@color/backgroundColor">
+
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignParentTop="true"
+      android:layout_centerHorizontal="true"
+      android:background="#07b892"
+      android:textStyle="italic"
+      android:fontFamily="sans-serif"
+      android:gravity="center"
+      android:paddingTop="20dp"
+      android:paddingBottom="20dp"
+      android:text="SELECT YOUR CATEGORY!!!"
+      android:textAllCaps="true"
+      android:textAlignment="center"
+      android:textColor="#ffffff"
+      android:textSize="20sp"/>
+
+  <ProgressBar
+      android:id="@+id/servicepro"
+      style="?android:attr/progressBarStyleHorizontal"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="5dp"
+      android:max="100"
+      android:indeterminate="true"
+      android:progress="50"
+      android:visibility="gone"/>
+
+  <TextView
+      android:id="@+id/note"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:paddingTop="8dp"
+      android:paddingBottom="8dp"
+      android:textSize="15sp"
+      android:textAlignment="center"
+      android:text="Note: Please wait while the progress bar is loading."
+      android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+      android:textColor="#888888"
+      android:visibility="gone"/>
+
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:clipToPadding="false"
+      android:gravity="center"
+      android:orientation="horizontal">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/study"
+        android:layout_width="160dp"
+        android:layout_height="200dp"
+        android:layout_margin="10dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true">
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:gravity="center"
+          android:orientation="vertical">
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/circlebackpurple"
+            android:src="@drawable/ic_local_library_black_24dp"
+            android:padding="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:textAlignment="center"
+            android:text="STUDY"
+            android:textColor="#000"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#cccccc"
+            android:layout_margin="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:textStyle="italic"
+            android:padding="5dp"
+            android:text="Gain Knowledge?     Let's Learn together!"
+            android:textColor="#666666"/>
+
+      </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/play"
+        android:layout_width="160dp"
+        android:layout_height="200dp"
+        android:layout_margin="10dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true">
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:gravity="center"
+          android:orientation="vertical">
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/circlebackred"
+            android:src="@drawable/baseline_sports_cricket_white_18dp"
+            android:padding="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:textAlignment="center"
+            android:text="PLAY"
+            android:textColor="#000"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#cccccc"
+            android:layout_margin="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:textStyle="italic"
+            android:padding="5dp"
+            android:text="Feel Energized?        Let's Play together!"
+            android:textColor="#666666"/>
+
+      </LinearLayout>
+    </androidx.cardview.widget.CardView>
+  </LinearLayout>
+
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:clipToPadding="false"
+      android:gravity="center"
+      android:orientation="horizontal">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/food"
+        android:layout_width="160dp"
+        android:layout_height="200dp"
+        android:layout_margin="10dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true">
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:gravity="center"
+          android:orientation="vertical">
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/circlebackorange"
+            android:src="@drawable/baseline_fastfood_white_18dp"
+            android:padding="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:textAlignment="center"
+            android:text="FOOD"
+            android:textColor="#000"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#cccccc"
+            android:layout_margin="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:textStyle="italic"
+            android:padding="5dp"
+            android:text="Feel Hungry?             Let's Eat together!"
+            android:textColor="#666666"/>
+
+      </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/hangout"
+        android:layout_width="160dp"
+        android:layout_height="200dp"
+        android:layout_margin="10dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true">
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:gravity="center"
+          android:orientation="vertical">
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/circlebackblue"
+            android:src="@drawable/baseline_emoji_people_white_18dp"
+            android:padding="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:textAlignment="center"
+            android:text="HANGOUT"
+            android:textColor="#000"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#cccccc"
+            android:layout_margin="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:textStyle="italic"
+            android:padding="5dp"
+            android:text="Wanna Explore?          Let's Explore together!"
+            android:textColor="#666666"/>
+
+      </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+  </LinearLayout>
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:clipToPadding="false"
+      android:gravity="center"
+      android:orientation="horizontal">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/other"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_margin="10dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true">
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:gravity="center"
+          android:orientation="vertical">
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/circlebackyellow"
+            android:src="@drawable/baseline_list_alt_white_18dp"
+            android:padding="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:textAlignment="center"
+            android:text="OTHER"
+            android:textColor="#000"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#cccccc"
+            android:layout_margin="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:textStyle="italic"
+            android:padding="5dp"
+            android:text="Want To Try Out Something Else?                  Let's Try It Out together!"
+            android:textColor="#666666"/>
+
+      </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+  </LinearLayout>
+
+
+
+</LinearLayout>
+</ScrollView>
