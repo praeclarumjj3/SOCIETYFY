@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.Fragments.SettingsFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Activities.Fragments.ProfileFragment"
+        android:orientation="vertical"
+        android:background="#fcfcfc">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="#07b892"
+        android:textStyle="italic"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:layout_marginBottom="15dp"
+        android:text="Configure!!!"
+        android:textAllCaps="true"
+        android:textAlignment="center"
+        android:textColor="#ffffff"
+        android:textSize="20sp"/>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="30dp"
+            android:paddingBottom="30dp">
+
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:text="Update Your Email Address"
+                android:textAlignment="center"
+                android:textColor="#333333"
+                android:textSize="15sp"
+                android:layout_gravity="center_vertical"/>
+
+            <EditText
+                android:id="@+id/new_email"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="40dp"
+                android:background="@drawable/profile_edit"
+                android:ems="10"
+                android:hint="Enter New Email"
+                android:inputType="textMultiLine"
+                android:padding="7dp"
+                android:textAlignment="center"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/update_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="40dp"
+                android:background="@drawable/reg_btnstyle"
+                android:gravity="center"
+                android:inputType="textMultiLine |textEmailAddress"
+                android:padding="3dp"
+                android:text="Update"
+                android:textColor="#ffffff"
+                android:textSize="13sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="30dp"
+            android:paddingBottom="30dp">
+
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:text="Update Your Password"
+                android:textAlignment="center"
+                android:textColor="#333333"
+                android:textSize="15sp"
+                android:layout_gravity="center_vertical"/>
+
+            <EditText
+                android:id="@+id/new_pwd"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="40dp"
+                android:background="@drawable/profile_edit"
+                android:ems="10"
+                android:hint="Enter New Password"
+                android:inputType=" textPassword |textMultiLine"
+                android:padding="7dp"
+                android:textAlignment="center"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/update_pwd"
+                android:layout_width="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="40dp"
+                android:background="@drawable/reg_btnstyle"
+                android:gravity="center"
+                android:inputType="textMultiLine"
+                android:padding="3dp"
+                android:text="Update"
+                android:textColor="#ffffff"
+                android:textSize="13sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="30dp"
+            android:paddingBottom="30dp">
+
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:text="Delete Your Account"
+                android:textAlignment="center"
+                android:textColor="#333333"
+                android:textSize="15sp"
+                android:layout_gravity="center_vertical"/>
+
+            <EditText
+                android:id="@+id/reason"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="40dp"
+                android:background="@drawable/profile_edit"
+                android:ems="10"
+                android:hint="Reason (Optional) "
+                android:inputType="textMultiLine"
+                android:padding="7dp"
+                android:textAlignment="center"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/delete_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="40dp"
+                android:background="@drawable/del_btn_style"
+                android:gravity="center"
+                android:inputType="textMultiLine"
+                android:padding="3dp"
+                android:text="Delete"
+                android:textColor="#ffffff"
+                android:textSize="13sp" />
+
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/setting"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:progressTint="#0a16ff"
+            android:indeterminateTint="#0a16ff"
+            android:layout_gravity="center_horizontal" />
+
+
+        <ExpandableListView
+            android:layout_width="match_parent"
+            android:layout_height="175dp"
+            android:id="@+id/Info">
+
+
+        </ExpandableListView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:textSize="15sp"
+            android:textAlignment="center"
+            android:inputType="textMultiLine"
+            android:layout_marginTop="35dp"
+            android:text="Note: The app will have to be RESTARTED after changing the configuration."
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="#888888" />
+
+    </LinearLayout>
+
+</ScrollView>

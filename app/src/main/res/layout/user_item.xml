@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:padding="10dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:id="@+id/User_imageList"
+        android:src="@drawable/userpic" />
+    <View
+        android:id="@+id/imageName"
+        android:layout_width="3dp"
+        android:layout_height="60dp"
+        android:background="#cccccc"
+        android:layout_toRightOf="@+id/User_imageList"
+        android:layout_toEndOf="@+id/User_imageList"
+        android:layout_marginLeft="10dp"
+        android:layout_toLeftOf="@+id/nameOfUser"/>
+
+    <TextView
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/nameOfUser"
+        android:layout_toRightOf="@+id/imageName"
+        android:layout_toEndOf="@+id/imageName"
+        android:layout_marginLeft="10dp"
+        android:layout_centerVertical="true"
+        android:textAlignment="center"
+        android:textColor="#555555"
+        android:textStyle="italic"
+        android:text="Username"
+        android:textSize="15dp"/>
+
+    <View
+        android:id="@+id/nameEmail"
+        android:layout_width="3dp"
+        android:layout_height="60dp"
+        android:background="#cccccc"
+        android:layout_toRightOf="@+id/nameOfUser"
+        android:layout_toEndOf="@+id/nameOfUser"
+        android:layout_marginLeft="10dp"
+        android:layout_toLeftOf="@+id/mailOfUser"/>
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/mailOfUser"
+        android:textStyle="italic"
+        android:layout_toRightOf="@+id/nameEmail"
+        android:layout_toEndOf="@+id/nameEmail"
+        android:textAlignment="center"
+        android:layout_marginLeft="10dp"
+        android:layout_centerVertical="true"
+        android:textColor="#555555"
+        android:text="Usermail"
+        android:textSize="15dp"/>
+
+
+</RelativeLayout>

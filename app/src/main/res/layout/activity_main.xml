@@ -1,62 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.societyfy.MainActivity">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start"
+    tools:context=".Activities.MainActivity">
 
-    <TextView
-        android:text="@string/sqlite_user_login_screen"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:textColor="#000"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/textView" />
 
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:hint="@string/enter_email"
-        android:textColor="#000"
-        android:ems="10"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:id="@+id/editEmail"
-        android:gravity="center"/>
 
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:hint="@string/enter_password"
-        android:textColor="#000"
-        android:ems="10"
-        android:layout_below="@+id/editEmail"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:id="@+id/editPassword"
-        android:gravity="center" />
+    <include
+    layout="@layout/app_bar_home"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
 
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/buttonLogin"
-        android:layout_below="@+id/editPassword"
-        android:layout_marginTop="20dp"
-        android:text="@string/log_in"/>
+    <com.google.android.material.navigation.NavigationView
+    android:background="#fff"
+    android:id="@+id/nav_view"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:fitsSystemWindows="true"
+    app:headerLayout="@layout/nav_header_home"
+    app:menu="@menu/activity_home2_drawer" />
 
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/buttonRegister"
-        android:layout_below="@+id/buttonLogin"
-        android:layout_marginTop="20dp"
-        android:text="@string/not_log_in_register_from_here"/>
-
-</RelativeLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

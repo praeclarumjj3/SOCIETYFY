@@ -1,8 +1,33 @@
 <resources>
-    <string name="app_name">Societyfy</string>
-    <string name="not_log_in_register_from_here">Not Log IN | Register From here</string>
-    <string name="log_in">Log IN</string>
-    <string name="enter_password">Enter Password</string>
-    <string name="enter_email">Enter Email</string>
-    <string name="sqlite_user_login_screen">SQLite User Login Screen</string>
+    <string name="app_name">SOCIETYFY</string>
+    <string name="title_activity_home">Home</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="hint_message_text">Type a message&#8230;</string>
+    <string name="error_empty_message">Please enter a message</string>
+    <string name="error_message_failed">Failed to send your message</string>
+
+    <!-- Intent extras -->
+    <string name="intent_user_locations">intent_user_locations</string>
+    <string name="intent_suser_locations">intent_suser_locations</string>
+    <string name="intent_puser_locations">intent_puser_locations</string>
+    <string name="intent_ouser_locations">intent_ouser_locations</string>
+    <string name="intent_huser_locations">intent_huser_locations</string>
+    <string name="intent_fuser_locations">intent_fuser_locations</string>
+    <string name="intent_location">intent_location</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
