@@ -1,16 +1,13 @@
 package com.example.societyfy.Activities;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,57 +26,55 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.societyfy.Activities.models.User;
 import com.example.societyfy.R;
-import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-
-import java.io.ByteArrayOutputStream;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
+
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RegisterFragment extends Fragment {
 
 
+    public static final int REQUEST_IMAGE = 100;
 
     CircleImageView ImgUserPhoto;
-    static int PReqCode=1;
-    static int RequesCode=1;
+    static int PReqCode = 1;
+    static int RequesCode = 1;
     public Uri pickedImgUri;
     public Uri downloadURL;
 
-    private EditText userMail,userPassword,userName;
+
+    private EditText userMail, userPassword, userName;
     private ProgressBar loadingProgress;
-    private Button regBtn;
+    private Button regBtn,btn;
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore mFirestore;
     private FirebaseStorage mStorage;
     StorageReference storageReference;
 
+
     public SharedPreferences preferences;
-    public SharedPreferences.Editor  editor;
+    public SharedPreferences.Editor editor;
     //public static String Url;
-
-
-
-
+    private static final int CAMERA_ACTION_PICK_REQUEST_CODE = 610;
+    private static final int PICK_IMAGE_GALLERY_REQUEST_CODE = 609;
+    public static final int CAMERA_STORAGE_REQUEST_CODE = 611;
+    public static final int ONLY_CAMERA_REQUEST_CODE = 612;
+    public static final int ONLY_STORAGE_REQUEST_CODE = 613;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -87,21 +82,29 @@ public class RegisterFragment extends Fragment {
 
 
         // Inflate the layout for this fragment
-        View v =inflater.inflate(R.layout.fragment_register, container, false);
+        View v = inflater.inflate(R.layout.fragment_register, container, false);
 
-        userMail=v.findViewById(R.id.regUid);
-        userPassword=v.findViewById(R.id.regPwd);
-        userName=v.findViewById(R.id.regName);
-        loadingProgress=v.findViewById(R.id.login_progress);
-        regBtn=v.findViewById(R.id.login_bton);
-
+        userMail = v.findViewById(R.id.regUid);
+        userPassword = v.findViewById(R.id.regPwd);
+        userName = v.findViewById(R.id.regName);
+        loadingProgress = v.findViewById(R.id.login_progress);
+        regBtn = v.findViewById(R.id.login_bton);
+        btn = v.findViewById(R.id.bton);
         loadingProgress.setVisibility(View.INVISIBLE);
-        mAuth=  FirebaseAuth.getInstance();
-        mFirestore=FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        mFirestore = FirebaseFirestore.getInstance();
         mStorage = FirebaseStorage.getInstance();
         storageReference = mStorage.getReference();
 
-
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
+                fragmentTransaction.replace(R.id.fragment, new LoginFragment());
+                fragmentTransaction.commit();
+            }
+        });
 
         regBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,25 +117,23 @@ public class RegisterFragment extends Fragment {
                 final String name = userName.getText().toString();
 
 
-                preferences = Objects.requireNonNull(getContext()).getSharedPreferences("User_pref",Context.MODE_PRIVATE);
+                preferences = Objects.requireNonNull(getContext()).getSharedPreferences("User_pref", Context.MODE_PRIVATE);
                 editor = preferences.edit();
                 editor.putString("password", userPassword.getText().toString());
                 editor.apply();
-
 
 
                 if (mail.isEmpty() || name.isEmpty() || password.isEmpty()) {
                     showMessage("Please Verify all fields");
                     regBtn.setVisibility(View.VISIBLE);
                     loadingProgress.setVisibility(View.INVISIBLE);
-                }
-                else {
+                } else {
 
-                    if(pickedImgUri!=null){
+                    if (pickedImgUri != null) {
 
-                    CreateUserAccount(mail,password,name);}
-                    else{
-                        showMessage("Please choose an image") ;
+                        CreateUserAccount(mail, password, name);
+                    } else {
+                        showMessage("Please choose an image");
                         loadingProgress.setVisibility(View.INVISIBLE);
                         regBtn.setVisibility(View.VISIBLE);
                     }
@@ -141,40 +142,42 @@ public class RegisterFragment extends Fragment {
             }
         });
 
-        ImgUserPhoto=v.findViewById(R.id.regUserPic);
+        ImgUserPhoto = v.findViewById(R.id.regUserPic);
         ImgUserPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Build.VERSION.SDK_INT>=28){
+                if (Build.VERSION.SDK_INT >= 28) {
                     checkAndRequestForPermission();
-                }
-                else{
-                    openGallery();
-                }
-            }
-        });
+                } else {
+                   openGallery();
 
+                }
+
+
+            }
+
+        });
 
 
         return v;
     }
 
+
+
     private void CreateUserAccount(final String uid, String pwd, final String name) {
 
-        mAuth.createUserWithEmailAndPassword(uid,pwd).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+        mAuth.createUserWithEmailAndPassword(uid, pwd).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-
+                if (task.isSuccessful()) {
 
 
                     showMessage("Account creation may take a few seconds. " +
                             "Please DON'T close the app");
-                    update(name,pickedImgUri,mAuth.getCurrentUser());
+                    update(name, pickedImgUri, mAuth.getCurrentUser());
 
 
-                }
-                else{
+                } else {
                     showMessage("Account creation failed. Change your e-mail id please.");
                     regBtn.setVisibility(View.VISIBLE);
                     loadingProgress.setVisibility(View.INVISIBLE);
@@ -262,13 +265,13 @@ public class RegisterFragment extends Fragment {
                     showMessage("FAILUREinURIobtain");
                 }
 
-                });
+            });
 
 
-
-        }else {  showMessage("Please choose an image") ;
-        loadingProgress.setVisibility(View.INVISIBLE);
-        regBtn.setVisibility(View.VISIBLE);
+        } else {
+            showMessage("Please choose an image");
+            loadingProgress.setVisibility(View.INVISIBLE);
+            regBtn.setVisibility(View.VISIBLE);
         }
     }
 
@@ -287,42 +290,38 @@ public class RegisterFragment extends Fragment {
 
     private void openGallery() {
 
-        Intent galleryIntent=new Intent(Intent.ACTION_GET_CONTENT);
+        Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
         galleryIntent.setType("image/*");
-        startActivityForResult(galleryIntent,RequesCode);
+        startActivityForResult(galleryIntent, RequesCode);
     }
 
 
     private void checkAndRequestForPermission() {
-        if(ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED){
-            if(ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),Manifest.permission.READ_EXTERNAL_STORAGE)){
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)) {
 
                 Toast.makeText(getContext(), "Please grant permission", Toast.LENGTH_SHORT).show();
 
+            } else {
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PReqCode);
+                checkAndRequestForPermission();
             }
-            else{
-                ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},PReqCode);
-                checkAndRequestForPermission();}
-        }
-        else
+        } else
             openGallery();
 
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode==-1 && requestCode==RequesCode && data!=null){
+        if (resultCode == -1 && requestCode == RequesCode && data != null) {
             pickedImgUri = data.getData();
             ImgUserPhoto.setImageURI(pickedImgUri);
 
         }
     }
-
-
-
-
-
-
-
 }
+
+
+

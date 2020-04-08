@@ -24,8 +24,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.example.societyfy.Activities.Adapters.UserAdapter;
 import com.example.societyfy.Activities.models.ClusterMarker;
@@ -89,7 +91,7 @@ public class Play_list extends Fragment implements OnMapReadyCallback, View.OnCl
     private ClusterManager<ClusterMarker> mClusterManager;
     private MyClusterManagerRenderer mClusterManagerRenderer;
     private ArrayList<ClusterMarker> mClusterMarkers = new ArrayList<>();
-
+    private boolean check = false;
     private Handler mHandler = new Handler();
     private Runnable mRunnable;
 
@@ -128,14 +130,31 @@ public class Play_list extends Fragment implements OnMapReadyCallback, View.OnCl
         v.findViewById(R.id.btn_reset_map).setOnClickListener(this);
 
 
-        ((MainActivity)getActivity()).toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.baseline_sports_cricket_white_18dp));
+        ((MainActivity)getActivity()).toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_black_24dp));
         ((MainActivity)getActivity()).toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
+                fragmentTransaction.replace(R.id.fragment, new PlayFragment());
+                fragmentTransaction.commit();
             }
         });
 
+        ToggleButton toggle = v.findViewById(R.id.aswitch);
+        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    check = true;
+                    mClusterMarkers = new ArrayList<>();
+                    addMapMarkers();
+                } else {
+                    check = false;
+                    mClusterMarkers = new ArrayList<>();
+                    addMapMarkers();
+                }
+            }
+        });
         getUsers();
         initUI();
         initGoogleMap(savedInstanceState);
@@ -168,6 +187,7 @@ public class Play_list extends Fragment implements OnMapReadyCallback, View.OnCl
 
             case R.id.chat_study:
                 fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
                 fragmentTransaction.replace(R.id.fragment, new PlayFragment());
                 fragmentTransaction.commit();
                 break;
@@ -321,16 +341,32 @@ public class Play_list extends Fragment implements OnMapReadyCallback, View.OnCl
                     String avatar = userLocation.getUser().getImage();
                     ;
 
-                    ClusterMarker newClusterMarker = new ClusterMarker(
-                            new LatLng(userLocation.getGeoPoint().getLatitude(), userLocation.getGeoPoint().getLongitude()),
-                            userLocation.getUser().getName(),
-                            snippet,
-                            avatar,
-                            userLocation.getUser(),
-                            getContext()
-                    );
-                    mClusterManager.addItem(newClusterMarker);
-                    mClusterMarkers.add(newClusterMarker);
+                    if (check) {
+                        ClusterMarker newClusterMarker = new ClusterMarker(
+                                new LatLng(userLocation.getGeoPoint().getLatitude(), userLocation.getGeoPoint().getLongitude()),
+                                userLocation.getUser().getName(),
+                                snippet,
+                                avatar,
+                                userLocation.getUser(),
+                                getContext()
+                        );
+                        mClusterManager.addItem(newClusterMarker);
+                        mClusterMarkers.add(newClusterMarker);
+                    } else {
+                        if(userLocation.getUser().getUser_id().equals(FirebaseAuth.getInstance().getUid())){
+                            continue;
+                        }
+                        ClusterMarker newClusterMarker = new ClusterMarker(
+                                new LatLng(userLocation.getGeoPoint().getLatitude(), userLocation.getGeoPoint().getLongitude()),
+                                userLocation.getUser().getName(),
+                                snippet,
+                                avatar,
+                                userLocation.getUser(),
+                                getContext()
+                        );
+                        mClusterManager.addItem(newClusterMarker);
+                        mClusterMarkers.add(newClusterMarker);
+                    }
 
                 } catch (NullPointerException e) {
                     Log.e(TAG, "addMapMarkers: NullPointerException: " + e.getMessage());

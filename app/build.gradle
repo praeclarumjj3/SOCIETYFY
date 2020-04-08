@@ -43,6 +43,9 @@ android {
 
 
 dependencies {
+    implementation 'com.github.yalantis:ucrop:2.2.2'
+    implementation 'pub.devrel:easypermissions:1.2.0'
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.7.0'
     implementation 'com.google.android.gms:play-services-location:17.0.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     //noinspection GradleCompatible
@@ -59,10 +62,10 @@ dependencies {
     //noinspection GradleCompatible
     implementation 'com.android.support:recyclerview-v7:28.0.0'
 
-    implementation 'com.google.firebase:firebase-analytics:17.2.1'
-    implementation 'com.google.firebase:firebase-auth:19.2.0'
-    implementation 'com.google.firebase:firebase-storage:19.1.0'
-    implementation 'com.google.firebase:firebase-firestore:21.3.1'
+    implementation 'com.google.firebase:firebase-analytics:17.3.0'
+    implementation 'com.google.firebase:firebase-auth:19.3.0'
+    implementation 'com.google.firebase:firebase-storage:19.1.1'
+    implementation 'com.google.firebase:firebase-firestore:21.4.2'
     implementation "com.firebaseui:firebase-ui-auth:4.3.1"
     implementation "com.firebaseui:firebase-ui-firestore:4.3.1"
 
@@ -70,7 +73,7 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.android.material:material:1.1.0'
 
     implementation 'com.google.maps.android:android-maps-utils:0.5'
 
@@ -80,9 +83,11 @@ dependencies {
     def nav_version = "2.1.0"
 
     // Java language implementation
+    //noinspection GradleDependency
     implementation "androidx.navigation:navigation-fragment:$nav_version"
+    //noinspection GradleDependency
     implementation "androidx.navigation:navigation-ui:$nav_version"
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
@@ -91,14 +96,18 @@ dependencies {
         def lifecycle_version = "2.1.0"
 
         // ViewModel and LiveData
+        //noinspection GradleDependency
         implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
         // alternatively - just ViewModel
+        //noinspection GradleDependency
         implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
         // For Kotlin use lifecycle-viewmodel-ktx
         // alternatively - just LiveData
+        //noinspection GradleDependency
         implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
         // alternatively - Lifecycles only (no ViewModel or LiveData). Some UI
         //     AndroidX libraries use this lightweight import for Lifecycle
+        //noinspection GradleDependency
         implementation "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"
 
         //noinspection LifecycleAnnotationProcessorWithJava8
@@ -108,6 +117,7 @@ dependencies {
         implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
 
         // optional - ReactiveStreams support for LiveData
+        //noinspection GradleDependency
         implementation "androidx.lifecycle:lifecycle-reactivestreams:$lifecycle_version"
         // For Kotlin use lifecycle-reactivestreams-ktx
 

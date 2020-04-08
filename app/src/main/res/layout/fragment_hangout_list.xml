@@ -5,6 +5,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
+    android:name="com.google.android.gms.maps.SupportMapFragment"
 tools:context=".Activities.Hangout_list"
 android:orientation="vertical">
 
@@ -17,25 +18,30 @@ android:orientation="vertical">
     android:weightSum="100"
     android:orientation="vertical">
 
-    <TextView
+    <ToggleButton
+        android:id="@+id/aswitch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:background="#07b892"
         android:textStyle="italic"
         android:fontFamily="sans-serif"
-        android:gravity="center"
+        android:gravity="left"
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
+        android:paddingRight="30dp"
+        android:paddingLeft="30dp"
+        android:checked="false"
+        android:background="#07b892"
         android:layout_marginBottom="10dp"
-        android:text="Meet your Hangout mates!!!"
-        android:textAllCaps="true"
+        android:shadowColor="#000"
         android:textAlignment="center"
-        android:textColor="#ffffff"
+        android:textOff="Tap here to enable location sharing with other hangout mates on the map"
+        android:textOn="Tap here to disable location sharing with other hangout mates on the map"
+        android:textAllCaps="false"
+        android:textColor="#fff"
         android:layout_weight="1"
-        android:textSize="20sp"/>
-
+        android:textSize="15sp"/>
 
 
     <androidx.recyclerview.widget.RecyclerView

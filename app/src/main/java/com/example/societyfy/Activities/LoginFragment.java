@@ -158,10 +158,8 @@ public class LoginFragment extends Fragment {
 
     private void updateUI() {
 
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
-        fragmentTransaction.replace(R.id.fragment, new PermissionFragment());
-        fragmentTransaction.commit();
+        final Intent i = new Intent(getActivity(), MainActivity.class);
+        startActivity(i);
     }
 
     @Override

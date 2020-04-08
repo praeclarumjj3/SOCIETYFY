@@ -23,8 +23,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.example.societyfy.Activities.Adapters.UserAdapter;
 import com.example.societyfy.Activities.models.ClusterMarker;
@@ -70,10 +73,12 @@ public class Study_list extends Fragment implements OnMapReadyCallback, View.OnC
     private static final int LOCATION_UPDATE_INTERVAL = 3000;
 
     private static final String TAG = "UserListFragment";
+    private boolean check = false;
 
 
     private RecyclerView userlist;
     private UserAdapter adapter;
+    private UserAdapter newadapter;
     private UserRepo userRepo;
     private View v;
 
@@ -127,14 +132,31 @@ public class Study_list extends Fragment implements OnMapReadyCallback, View.OnC
         v.findViewById(R.id.btn_full_screen_map).setOnClickListener(this);
         v.findViewById(R.id.btn_reset_map).setOnClickListener(this);
 
-        ((MainActivity)getActivity()).toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_local_library_black_24dp));
+        ((MainActivity)getActivity()).toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_black_24dp));
         ((MainActivity)getActivity()).toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
+                fragmentTransaction.replace(R.id.fragment, new StudyFragment());
+                fragmentTransaction.commit();
             }
         });
 
+        ToggleButton toggle = v.findViewById(R.id.aswitch);
+        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    check = true;
+                    mClusterMarkers = new ArrayList<>();
+                    addMapMarkers();
+                } else {
+                    check = false;
+                    mClusterMarkers = new ArrayList<>();
+                    addMapMarkers();
+                }
+            }
+        });
         getUsers();
         initUI();
         initGoogleMap(savedInstanceState);
@@ -167,6 +189,7 @@ public class Study_list extends Fragment implements OnMapReadyCallback, View.OnC
 
             case R.id.chat_study:
                 fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
                 fragmentTransaction.replace(R.id.fragment, new StudyFragment());
                 fragmentTransaction.commit();
                 break;
@@ -178,12 +201,15 @@ public class Study_list extends Fragment implements OnMapReadyCallback, View.OnC
 
     private void initUI() {
 
-        userlist = v.findViewById(R.id.study_list);
+
         adapter = new UserAdapter(userList, getActivity(),this);
-        userlist.setAdapter(adapter);
-        userlist.setLayoutManager(new LinearLayoutManager(getContext()));
+        mUserListRecyclerView.setAdapter(adapter);
+        mUserListRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
 
     }
+
+
 
     private void getUsers() {
 
@@ -198,10 +224,9 @@ public class Study_list extends Fragment implements OnMapReadyCallback, View.OnC
 
                 for (QueryDocumentSnapshot doc : snapshots) {
                     userList.add(new User(doc.getString("email"), doc.getString("image"), doc.getString("name"), doc.getString("user_id")));
-                }
 
-            }
-        });
+                }
+            }});
     }
 
 
@@ -319,17 +344,33 @@ public class Study_list extends Fragment implements OnMapReadyCallback, View.OnC
 
                     String avatar = userLocation.getUser().getImage();
                     ;
+                    if (check) {
+                        ClusterMarker newClusterMarker = new ClusterMarker(
+                                new LatLng(userLocation.getGeoPoint().getLatitude(), userLocation.getGeoPoint().getLongitude()),
+                                userLocation.getUser().getName(),
+                                snippet,
+                                avatar,
+                                userLocation.getUser(),
+                                getContext()
+                        );
+                        mClusterManager.addItem(newClusterMarker);
+                        mClusterMarkers.add(newClusterMarker);
+                    } else {
+                        if(userLocation.getUser().getUser_id().equals(FirebaseAuth.getInstance().getUid())){
+                            continue;
+                        }
+                        ClusterMarker newClusterMarker = new ClusterMarker(
+                                new LatLng(userLocation.getGeoPoint().getLatitude(), userLocation.getGeoPoint().getLongitude()),
+                                userLocation.getUser().getName(),
+                                snippet,
+                                avatar,
+                                userLocation.getUser(),
+                                getContext()
+                        );
+                        mClusterManager.addItem(newClusterMarker);
+                        mClusterMarkers.add(newClusterMarker);
+                    }
 
-                    ClusterMarker newClusterMarker = new ClusterMarker(
-                            new LatLng(userLocation.getGeoPoint().getLatitude(), userLocation.getGeoPoint().getLongitude()),
-                            userLocation.getUser().getName(),
-                            snippet,
-                            avatar,
-                            userLocation.getUser(),
-                            getContext()
-                    );
-                    mClusterManager.addItem(newClusterMarker);
-                    mClusterMarkers.add(newClusterMarker);
 
                 } catch (NullPointerException e) {
                     Log.e(TAG, "addMapMarkers: NullPointerException: " + e.getMessage());
