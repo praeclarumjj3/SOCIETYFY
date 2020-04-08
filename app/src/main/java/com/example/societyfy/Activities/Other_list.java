@@ -218,8 +218,7 @@ public class Other_list extends Fragment implements OnMapReadyCallback, View.OnC
 
 
                 for (QueryDocumentSnapshot doc : snapshots) {
-
-                    if(!doc.getString("user_id").equals(FirebaseAuth.getInstance().getUid()))
+                        
                     userList.add(new User(doc.getString("email"), doc.getString("image"), doc.getString("name"), doc.getString("user_id")));
                 }
 
