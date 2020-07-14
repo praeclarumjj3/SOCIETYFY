@@ -1,4 +1,4 @@
-# Societyfy: Unified Computer Vision Model Trunk and Embeddings For Commerce
+# Societyfy
 
 ## Overview
 
